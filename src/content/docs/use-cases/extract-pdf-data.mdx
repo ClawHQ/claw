@@ -1,0 +1,182 @@
+---
+title: Extract Data from PDFs
+description: Pull invoice data, contract deliverables, and more into spreadsheets.
+---
+
+You have 50 PDF invoices. You need the amounts, dates, and vendor names in a spreadsheet. Doing this manually takes hours. Ishi does it in minutes.
+
+---
+
+## What You'll Accomplish
+
+By the end of this guide, you'll know how to:
+
+- 📄 Extract structured data from PDFs
+- 📊 Export to CSV, Excel, or directly to apps like Notion/Airtable
+- 🔍 Parse contracts for key terms and deliverables
+- ✅ Verify extracted data before committing
+
+---
+
+## Step 1: Point Ishi to Your PDFs
+
+Open Ishi and describe what you need:
+
+```
+I have 50 invoices in my Documents/Invoices folder.
+Extract the vendor name, invoice number, date, and total amount from each.
+Export to a CSV file.
+```
+
+Ishi will read your request and ask any clarifying questions.
+
+---
+
+## Step 2: Preview the Extraction
+
+Before processing all files, Ishi shows a **sample extraction**:
+
+```
+📄 Sample: Acme-Corp-Invoice-001.pdf
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Extracted Fields:
+┌─────────────┬─────────────────────────┐
+│ Vendor      │ Acme Corporation        │
+│ Invoice #   │ INV-2025-0042           │
+│ Date        │ 2025-01-02              │
+│ Amount      │ $1,250.00               │
+│ Due Date    │ 2025-02-01              │
+└─────────────┴─────────────────────────┘
+
+Does this look correct? [Yes, proceed with all] [Adjust fields] [Cancel]
+```
+
+This preview ensures Ishi understood your document structure correctly.
+
+---
+
+## Step 3: Process All Files
+
+Once you approve the sample, Ishi processes all PDFs:
+
+```
+Processing invoices...
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ 48/50 extracted successfully
+⚠️ 2 need review (unclear vendor name)
+
+[Review flagged items] [Download CSV]
+```
+
+Files that couldn't be parsed confidently are flagged for manual review—Ishi never guesses.
+
+---
+
+## Step 4: Review & Export
+
+Ishi shows you the complete dataset before creating any files:
+
+| Vendor    | Invoice #     | Date       | Amount    |
+| --------- | ------------- | ---------- | --------- |
+| Acme Corp | INV-2025-0042 | 2025-01-02 | $1,250.00 |
+| Beta LLC  | INV-8821      | 2025-01-03 | $840.00   |
+| ...       | ...           | ...        | ...       |
+
+Then choose your export format:
+
+- **CSV** — Universal spreadsheet format
+- **Excel (.xlsx)** — With formatting
+- **Direct to Notion** — Via MCP integration
+- **Direct to Airtable** — Via MCP integration
+
+---
+
+## Example Use Cases
+
+### Invoices
+
+```
+Extract vendor, invoice number, date, amount, and due date
+from all PDFs in Downloads/Invoices
+```
+
+### Contracts
+
+```
+Read this contract and create a list of all deliverables,
+deadlines, and payment milestones
+```
+
+### Receipts
+
+```
+Parse these expense receipts and create an expense report
+with categories, dates, and amounts
+```
+
+### Statements
+
+```
+Extract all transactions from this bank statement PDF
+and export to Excel
+```
+
+---
+
+## Working with Scanned PDFs
+
+For scanned documents (images, not text), Ishi uses OCR:
+
+```
+These are scanned invoices. Use OCR to extract the text first,
+then parse the vendor and amounts.
+```
+
+Scanned documents take longer but work with the same workflow.
+
+---
+
+## Connecting to Cloud Apps
+
+Want data to go directly to Notion, Airtable, or Google Sheets?
+
+1. Set up the [MCP integration](/docs/advanced/integrations) for your app
+2. Ask Ishi to export directly:
+
+```
+Extract invoice data and add each row to my Airtable "Invoices" table
+```
+
+---
+
+## Safety Features
+
+### Preview Before Commit
+
+Every extraction is previewed before any files are created.
+
+### No Guessing
+
+If Ishi can't confidently parse a field, it flags it for review.
+
+### Local Processing
+
+Your PDFs never leave your computer. Extraction happens locally.
+
+---
+
+## Tips for Best Results
+
+1. **Be specific about field names** — "Extract 'Total Due' not 'Subtotal'"
+2. **Provide a sample** — "The vendor name is usually in the top-left header"
+3. **Start with one file** — Test the extraction before running on hundreds
+
+---
+
+## Next Steps
+
+- [Organize Downloads](/docs/use-cases/organize-downloads) — Auto-sort files as they arrive
+- [Cloud Integrations](/docs/advanced/integrations) — Connect to Notion, Airtable, etc.
+- [Batch Processing](/docs/capabilities/file-operations) — Work with hundreds of files

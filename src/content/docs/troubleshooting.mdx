@@ -1,0 +1,388 @@
+---
+title: Troubleshooting
+description: Common issues and how to resolve them.
+---
+
+To debug any issues with Ishi, you can check the logs or the session data
+that it stores locally.
+
+---
+
+### Logs
+
+Log files are written to:
+
+- **macOS/Linux**: `~/.local/share/ishi/log/`
+- **Windows**: `%USERPROFILE%\.local\share\ishi\log\`
+
+Log files are named with timestamps (e.g., `2025-01-09T123456.log`) and the most recent 10 log files are kept.
+
+You can set the log level with the `--log-level` command-line option to get more detailed debug information. For example, `ishi --log-level DEBUG`.
+
+---
+
+### Storage
+
+Ishi stores session data and other application data on disk at:
+
+- **macOS/Linux**: `~/.local/share/ishi/`
+- **Windows**: `%USERPROFILE%\.local\share\ishi`
+
+This directory contains:
+
+- `auth.json` - Authentication data like API keys, OAuth tokens
+- `log/` - Application logs
+- `project/` - Project-specific data like session and message data
+  - If the project is within a Git repo, it is stored in `./<project-slug>/storage/`
+  - If it is not a Git repo, it is stored in `./global/storage/`
+
+---
+
+## Getting help
+
+If you're experiencing issues with Ishi:
+
+1. **Report issues on GitHub**
+
+   The best way to report bugs or request features is through our GitHub repository:
+
+   [**github.com/PixelML/ishi/issues**](https://github.com/PixelML/ishi/issues)
+
+   Before creating a new issue, search existing issues to see if your problem has already been reported.
+
+2. **Join our Discord**
+
+   For real-time help and community discussion, join our Discord server:
+
+   [**ishi.so/discord**](https://ishi.so/discord)
+
+---
+
+## Common issues
+
+Here are some common issues and how to resolve them.
+
+---
+
+### Ishi won't start
+
+1. Check the logs for error messages
+2. Try running with `--print-logs` to see output in the terminal
+3. Ensure you have the latest version with `ishi upgrade`
+
+---
+
+### Authentication issues
+
+1. Try re-authenticating with the `/connect` command in the TUI
+2. Check that your API keys are valid
+3. Ensure your network allows connections to the provider's API
+
+---
+
+### Model not available
+
+1. Check that you've authenticated with the provider
+2. Verify the model name in your config is correct
+3. Some models may require specific access or subscriptions
+
+If you encounter `ProviderModelNotFoundError` you are most likely incorrectly
+referencing a model somewhere.
+Models should be referenced like so: `<providerId>/<modelId>`
+
+Examples:
+
+- `openai/gpt-4.1`
+- `openrouter/google/gemini-2.5-flash`
+- `ishi/kimi-k2`
+
+To figure out what models you have access to, run `ishi models`
+
+---
+
+### ProviderInitError
+
+If you encounter a ProviderInitError, you likely have an invalid or corrupted configuration.
+
+To resolve this:
+
+1. First, verify your provider is set up correctly by following the [providers guide](/docs/providers)
+2. If the issue persists, try clearing your stored configuration:
+
+   ```bash
+   rm -rf ~/.local/share/ishi
+   ```
+
+3. Re-authenticate with your provider using the `/connect` command in the TUI.
+
+---
+
+### AI_APICallError and provider package issues
+
+If you encounter API call errors, this may be due to outdated provider packages. Ishi dynamically installs provider packages (OpenAI, Anthropic, Google, etc.) as needed and caches them locally.
+
+To resolve provider package issues:
+
+1. Clear the provider package cache:
+
+   ```bash
+   rm -rf ~/.cache/ishi
+   ```
+
+2. Restart Ishi to reinstall the latest provider packages
+
+This will force Ishi to download the most recent versions of provider packages, which often resolves compatibility issues with model parameters and API changes.
+
+---
+
+### Copy/paste not working on Linux
+
+Linux users need to have one of the following clipboard utilities installed for copy/paste functionality to work:
+
+**For X11 systems:**
+
+```bash
+apt install -y xclip
+# or
+apt install -y xsel
+```
+
+**For Wayland systems:**
+
+```bash
+apt install -y wl-clipboard
+```
+
+**For headless environments:**
+
+```bash
+apt install -y xvfb
+# and run:
+Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+export DISPLAY=:99.0
+```
+
+Ishi will detect if you're using Wayland and prefer `wl-clipboard`, otherwise it will try to find clipboard tools in order of: `xclip` and `xsel`.
+
+---
+
+## Antivirus & Firewall Issues
+
+Security software can block Ishi's internal communication. Ishi uses a local sidecar server that needs to communicate via localhost. If your antivirus or firewall blocks this, you may see connection errors or the app failing to start.
+
+> **Note for legacy Ishi users:** If you're still using Ishi (the previous version before rebranding to Ishi), replace `ishi` with `ishi` in all paths and process names below. For example, look for `claw.exe` instead of `ishi.exe`, and `%LOCALAPPDATA%\Ishi\` instead of `%LOCALAPPDATA%\Ishi\`.
+
+---
+
+### Windows: BitDefender
+
+BitDefender may quarantine or block Ishi executables. Follow these steps:
+
+**1. Check Quarantine**
+
+1. Open BitDefender
+2. Go to **Protection → Antivirus → Quarantine**
+3. Look for `ishi.exe`, `ishi-cli.exe` (or `claw.exe`, `ishi-cli.exe` for legacy users)
+4. If found, **Restore** and mark as **Allow**
+
+**2. Add Firewall Exception**
+
+1. Open BitDefender
+2. Go to **Protection → Firewall**
+3. Click **Application Access**
+4. Find `ishi.exe` and `ishi-cli.exe` (or `claw.exe` and `ishi-cli.exe` for legacy users)
+5. Click on each to expand and ensure these settings:
+   - **Network**: Any Network
+   - **Protocol**: Any
+   - **Traffic**: Both (Inbound & Outbound)
+   - **Ports**: Any
+   - **IP**: Any
+   - **Access**: ON (blue toggle)
+
+**3. Disable Advanced Threat Prevention (if needed)**
+
+If issues persist, check these additional settings:
+
+1. Go to **Protection → Advanced Threat Defense**
+2. Temporarily **disable** or add an exception for Ishi
+3. Go to **Protection → Online Threat Prevention**
+4. Check if **SSL/HTTPS scanning** is blocking localhost traffic
+
+**4. Restart Ishi after making changes**
+
+```powershell
+# Force stop any running Ishi/Ishi processes
+Get-Process | Where-Object { $_.ProcessName -match "ishi|claw" } | Stop-Process -Force
+
+# Restart Ishi (adjust path if different)
+Start-Process "$env:LOCALAPPDATA\Ishi\Ishi.exe"
+# Or for legacy Ishi:
+# Start-Process "$env:LOCALAPPDATA\Ishi\Ishi.exe"
+```
+
+---
+
+### Windows: Windows Defender
+
+Windows Defender can also block or quarantine Ishi.
+
+**1. Check Threat History**
+
+1. Open **Windows Security**
+2. Go to **Virus & threat protection**
+3. Click **Protection history**
+4. Look for blocked items related to Ishi or Ishi
+5. Click and select **Allow on device**
+
+**2. Add Exclusions**
+
+1. Open **Windows Security**
+2. Go to **Virus & threat protection → Manage settings**
+3. Scroll to **Exclusions** and click **Add or remove exclusions**
+4. Add folder exclusion: `%LOCALAPPDATA%\Ishi\` (or `%LOCALAPPDATA%\Ishi\` for legacy)
+
+**3. Allow Through Firewall**
+
+1. Open **Windows Security**
+2. Go to **Firewall & network protection**
+3. Click **Allow an app through firewall**
+4. Ensure **Ishi** (or **Ishi** for legacy) is listed and checked for both **Private** and **Public** networks
+5. If not listed, click **Allow another app** and browse to the executable
+
+---
+
+### Windows: Other Antivirus Software
+
+For other antivirus software (Norton, McAfee, Kaspersky, Avast, etc.):
+
+1. Check the **Quarantine** or **Blocked items** section for Ishi/Ishi files
+2. Add the installation folder to the **Exclusions** list:
+   - Ishi: `%LOCALAPPDATA%\Ishi\`
+   - Legacy Ishi: `%LOCALAPPDATA%\Ishi\`
+3. Create a **Firewall rule** to allow `ishi.exe`/`ishi-cli.exe` (or `claw.exe`/`ishi-cli.exe`)
+4. Ensure **localhost (127.0.0.1)** traffic is not being inspected or blocked
+
+---
+
+### Windows: Verify Ishi is Running
+
+After making security changes, verify Ishi is working:
+
+```powershell
+# Check if Ishi/Ishi sidecar is listening on a port
+Get-NetTCPConnection -State Listen | Where-Object { 
+    $proc = Get-Process -Id $_.OwningProcess -ErrorAction SilentlyContinue
+    $proc.ProcessName -match "ishi|claw"
+} | Select-Object LocalPort
+
+# Test the health endpoint (replace PORT with the discovered port)
+curl http://127.0.0.1:PORT/health
+```
+
+---
+
+### macOS: Firewall Settings
+
+macOS's built-in firewall can block Ishi's network communication.
+
+**1. Check Firewall Settings**
+
+1. Open **System Settings** (or System Preferences on older macOS)
+2. Go to **Privacy & Security → Firewall**
+3. Click **Options** or **Firewall Options**
+4. Look for **Ishi** (or **Ishi** for legacy users) in the list of applications
+5. Ensure it's set to **Allow incoming connections**
+6. If not listed, click **+** and add from `/Applications/Ishi.app` (or `/Applications/Ishi.app`)
+
+**2. Check App Management**
+
+1. Open **System Settings → Privacy & Security → App Management**
+2. Ensure Ishi (or Ishi) has permission to update other applications (if present)
+
+**3. Network Access for Downloaded Apps**
+
+When you first run Ishi, macOS may ask if you want to allow network access. If you accidentally clicked **Deny**:
+
+1. Open **System Settings → Privacy & Security → Firewall → Options**
+2. Remove Ishi from the list and re-add it, or set it to **Allow**
+
+Alternatively, reset firewall rules for Ishi from Terminal:
+
+```bash
+# Remove firewall rules for Ishi (requires admin password)
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --remove /Applications/Ishi.app
+
+# Re-add with allow
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /Applications/Ishi.app
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /Applications/Ishi.app
+
+# For legacy Ishi users, use these commands instead:
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --remove /Applications/Ishi.app
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /Applications/Ishi.app
+# sudo /usr/libexec/ApplicationFirewall/socketfilterfw --unblockapp /Applications/Ishi.app
+```
+
+---
+
+### macOS: Third-Party Security Software
+
+If you use third-party security software (Little Snitch, LuLu, etc.):
+
+1. Open your security app's connection rules
+2. Find rules related to **Ishi** or **ishi-cli** (or **Ishi**/**ishi-cli** for legacy)
+3. Allow all connections, especially to **localhost (127.0.0.1)**
+4. Ensure both **inbound** and **outbound** connections are permitted
+
+---
+
+### macOS: Verify Ishi is Running
+
+After making security changes, verify Ishi is working:
+
+```bash
+# Check if Ishi/Ishi sidecar is listening
+lsof -i -P | grep -iE "ishi|claw" | grep LISTEN
+
+# Test the health endpoint (replace PORT with discovered port)
+curl http://127.0.0.1:PORT/health
+```
+
+---
+
+### Nuclear Reset (Last Resort)
+
+If nothing else works, try a complete reset:
+
+**Windows:**
+```powershell
+# Stop all Ishi/Ishi processes
+Get-Process | Where-Object { $_.ProcessName -match "ishi|claw" } | Stop-Process -Force
+
+# Clear Ishi data (adjust path for legacy Ishi: replace 'ishi' with 'ishi')
+Remove-Item -Recurse -Force "$env:USERPROFILE\.local\share\ishi" -ErrorAction SilentlyContinue
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Ishi\cache" -ErrorAction SilentlyContinue
+
+# For legacy Ishi users:
+# Remove-Item -Recurse -Force "$env:USERPROFILE\.local\share\claw" -ErrorAction SilentlyContinue
+# Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Ishi\cache" -ErrorAction SilentlyContinue
+
+# Reinstall from the latest download
+```
+
+**macOS:**
+```bash
+# Stop all Ishi/Ishi processes
+pkill -9 -iE "ishi|claw"
+
+# Clear Ishi data (adjust for legacy Ishi: replace 'ishi' with 'ishi')
+rm -rf ~/.local/share/ishi
+rm -rf ~/Library/Caches/so.ishi.app
+
+# For legacy Ishi users:
+# rm -rf ~/.local/share/claw
+# rm -rf ~/Library/Caches/so.ishi.app
+
+# Reinstall from the latest download
+```
+
+After reinstalling, make sure to approve any security prompts that appear.

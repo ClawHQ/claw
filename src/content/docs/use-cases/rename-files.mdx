@@ -1,0 +1,158 @@
+---
+title: Rename Files Intelligently
+description: Automatically rename files based on their content, dates, or patterns.
+---
+
+`IMG_4832.png`. `Document (1).docx`. `Untitled-23.pdf`.
+
+Your files deserve better names. Ishi analyzes content and proposes intelligent renames.
+
+---
+
+## What You'll Accomplish
+
+- 🏷️ Rename files based on their actual content
+- 📅 Add dates to file names automatically
+- 🔄 Apply consistent naming patterns across folders
+- 👻 Preview all renames before they happen
+
+---
+
+## Step 1: Select Files to Rename
+
+Open Ishi and describe what you need:
+
+```
+I have 100 screenshots in my Desktop folder.
+Rename them based on what's shown in each image.
+```
+
+Or be more specific:
+
+```
+Rename all PDFs in Documents to include the document date
+in the format: YYYY-MM-DD-OriginalName.pdf
+```
+
+---
+
+## Step 2: Review the Proposals
+
+Ishi shows you every proposed rename side-by-side:
+
+```
+📝 Proposed Renames
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Current Name              →  Proposed Name
+──────────────────────────────────────────
+IMG_4832.png              →  Dashboard-Analytics-Chart.png
+Screenshot 2025-01-03.png →  Login-Page-Redesign-v2.png
+Untitled.docx             →  Q4-Budget-Proposal.docx
+scan001.pdf               →  2025-01-02-Acme-Invoice.pdf
+
+[Approve All] [Review One-by-One] [Cancel]
+```
+
+---
+
+## Step 3: Approve, Edit, or Skip
+
+For each file, you can:
+
+| Action             | What Happens             |
+| ------------------ | ------------------------ |
+| ✅ **Approve**     | Rename as proposed       |
+| ✏️ **Edit**        | Modify the proposed name |
+| ⏭️ **Skip**        | Leave unchanged          |
+| ✅ **Approve All** | Accept all remaining     |
+
+---
+
+## Naming Patterns
+
+### By Content (AI-Powered)
+
+```
+Rename screenshots based on what's visible in the image
+```
+
+_Uses AI vision to understand image content_
+
+### By Date
+
+```
+Add the file creation date to all PDFs: YYYY-MM-DD-filename.pdf
+```
+
+### By Pattern
+
+```
+Rename invoice PDFs to: Vendor-InvoiceNumber-Date.pdf
+```
+
+### By Metadata
+
+```
+Rename photos using their EXIF date: 2025-01-03-IMG_4832.jpg
+```
+
+---
+
+## Bulk Renaming Examples
+
+| Goal        | What to Say                                               |
+| ----------- | --------------------------------------------------------- |
+| Screenshots | "Rename screenshots based on their visual content"        |
+| Invoices    | "Rename to Vendor-Amount-Date format"                     |
+| Photos      | "Use photo date from metadata"                            |
+| Documents   | "Add creation date prefix"                                |
+| Clean up    | "Remove spaces and special characters from all filenames" |
+
+---
+
+## Safety: The Ghost File Preview
+
+Before any file is renamed, you see a **Ghost Preview**:
+
+```
+┌─────────────────────────────────────────┐
+│  📄 Current: IMG_4832.png               │
+│  👻 Proposed: Dashboard-Chart.png       │
+│                                         │
+│  The ghost file shows you exactly what  │
+│  the new name will be before commit.    │
+│                                         │
+│  [Approve] [Edit Name] [Skip]           │
+└─────────────────────────────────────────┘
+```
+
+Nothing changes until you approve.
+
+---
+
+## Undo Any Rename
+
+Made a mistake? Every rename is logged:
+
+1. Open **History** in Ishi
+2. Find the rename operation
+3. Click **Undo**
+
+The file reverts to its original name instantly.
+
+---
+
+## Tips for Best Results
+
+1. **Start with a test batch** — Try 5-10 files before processing hundreds
+2. **Be specific about format** — "Use hyphens, no spaces, lowercase"
+3. **Include examples** — "Like: Acme-INV001-2025-01-03.pdf"
+
+---
+
+## Next Steps
+
+- [Organize Downloads](/docs/use-cases/organize-downloads) — Sort files into folders
+- [Extract PDF Data](/docs/use-cases/extract-pdf-data) — Pull data from documents
+- [Undo History](/docs/trust-safety/undo-history) — Learn about the transaction log

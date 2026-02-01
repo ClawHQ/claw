@@ -1,0 +1,123 @@
+---
+title: Getting Started
+description: Get your Digital Employee up and running in 5 minutes.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components"
+import config from "../../../config.mjs"
+export const console = config.console
+
+[**Ishi**](/) is your **Digital Employee**—a Desktop AI that bridges your local files and cloud power. It's the "Hands" to the AI "Brain," automating business operations you'd otherwise do manually.
+
+### See Ishi in Action
+
+<div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden" }}>
+  <iframe
+    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+    src="https://www.youtube.com/embed/9QMHYkn59cE"
+    title="Meet Ishi"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</div>
+
+Let's get your new team member set up.
+
+---
+
+## Download the Desktop App
+
+The fastest way to start is with the Ishi Desktop App:
+
+| Platform              | Download                                                        |
+| --------------------- | --------------------------------------------------------------- |
+| macOS (Apple Silicon) | [Download .dmg](https://ishi.so/download?platform=darwin-arm64) |
+| macOS (Intel)         | [Download .dmg](https://ishi.so/download?platform=darwin-x64)   |
+| Windows               | [Download .exe](https://ishi.so/download?platform=win-x64)      |
+
+Or grab it from the [releases page](https://github.com/PixelML/ishi/releases).
+
+---
+
+## Connect Your AI
+
+Ishi needs an AI provider to power its intelligence. We recommend **Ishi Intent Engine** for the easiest setup—it's included with your license and automatically routes tasks to the best model.
+
+1. Open Ishi and run `/connect`
+2. Select **Ishi** and sign in at [ishi.so/auth](https://ishi.so/auth)
+3. Add billing details and copy your API key
+4. Paste when prompted—you're ready to go!
+
+Already have an API key from Anthropic, OpenAI, or Google? [Connect any provider](/docs/providers).
+
+---
+
+## What Ishi Does
+
+Your Digital Employee can handle the operational tasks that eat up your day:
+
+### 📁 Smart File Organization
+
+Tell Ishi to watch your Downloads folder. When files arrive, it proposes intelligent renames and organization:
+
+- `Scan_001.pdf` → `2025-01-Invoice-Acme-Corp.pdf`
+- `Screenshot 2025-01-03.png` → `Homepage-Redesign-Draft.png`
+
+### 👻 Ghost Files (Preview Before Commit)
+
+Ishi **never touches your files without approval**. Every proposed change shows a preview:
+
+- **Before:** Current file/folder state
+- **After:** What it will look like
+- **Your choice:** Approve or reject
+
+This is the "Glass Box" philosophy—you see everything before it happens.
+
+### 🎚️ Safety Slider
+
+Control how much autonomy Ishi has:
+
+- **Level 1 (Intern):** "Ask me before doing anything"
+- **Level 2 (Associate):** "Handle routine tasks, ask for important ones"
+- **Level 3 (Partner):** "Just get it done and notify me"
+
+### ↩️ Undo Everything
+
+Made a mistake? Every action is logged. Undo any change with one click.
+
+### ☁️ Cloud Bridge
+
+Connect your local files to cloud workflows. Drag files onto AgenticFlow integrations to sync with 2,500+ apps like Notion, Airtable, and Google Sheets.
+
+---
+
+## Example Tasks
+
+Here's what operators use Ishi for:
+
+| Task                      | What to Ask                                                      |
+| ------------------------- | ---------------------------------------------------------------- |
+| 📂 **Organize invoices**  | "Watch my Downloads folder and sort invoices by vendor and date" |
+| 📄 **Extract PDF data**   | "Read this contract and extract deliverables into a spreadsheet" |
+| 🖼️ **Rename screenshots** | "Rename these screenshots based on their content"                |
+| 📊 **Reconcile data**     | "Compare this Excel file with my Stripe transactions"            |
+| 🔒 **Sanitize files**     | "Remove metadata from these images before I share them"          |
+
+---
+
+## Get Help
+
+- **Documentation:** Browse the sidebar to learn more
+- **Discord:** [Join the community](https://qra.ai/discord)
+- **Support:** [ishi.so/support](https://ishi.so/support)
+
+---
+
+## Customize
+
+Ready to make Ishi your own?
+
+- [Safety & Control](/docs/permissions) — Set approval requirements
+- [Themes](/docs/themes) — Pick your visual style
+- [Keyboard Shortcuts](/docs/keybinds) — Speed up your workflow

@@ -1,0 +1,154 @@
+---
+title: Pixel ML OpenRouter
+description: Single gateway to all AI models with intelligent routing.
+---
+
+import { Aside } from "@astrojs/starlight/components"
+import config from "../../../config.mjs"
+export const console = config.console
+
+**Pixel ML OpenRouter** is your unified gateway to access all major AI models through a single API. No need to manage multiple API keys or billing accounts—connect once and access everything.
+
+<Aside type="tip" title="$1 Free Credit">
+  Every Ishi customer gets **$1 free credit** to try Pixel ML OpenRouter. Once you've used your credit, top up at
+  [platform.pixelml.com](https://platform.pixelml.com/).
+</Aside>
+
+---
+
+## The Pioneer: Ishi Intent Engine v1.0
+
+Our flagship model, **Ishi Intent Engine**, is the implementation of the [Semantic Router](https://arxiv.org/abs/2506.16655) research paper. It intelligently routes your requests to the most cost-effective model while maintaining quality.
+
+### How It Works
+
+Instead of always using the most expensive model:
+
+1. **Ishi analyzes your prompt** — Understands the complexity of your request
+2. **Routes to optimal model** — Simple tasks use cheaper models, complex tasks use premium ones
+3. **You save money** — Pay for what you need, not what you don't
+
+### Cost Savings Example
+
+| Task                        | Traditional (GPT-4) | With Ishi | Savings           |
+| --------------------------- | ------------------- | --------- | ----------------- |
+| "Rename this file"          | $0.03               | $0.001    | 97%               |
+| "Write a basic email"       | $0.05               | $0.003    | 94%               |
+| "Analyze this complex code" | $0.08               | $0.08     | 0% (uses premium) |
+
+Ishi is smart—it uses premium models only when the task requires it.
+
+---
+
+## Getting Started
+
+1. **Sign in** at [ishi.so/auth](https://ishi.so/auth)
+2. **Your $1 credit** is automatically applied
+3. **Connect in Ishi** — Run `/connect` and select **Pixel ML**
+4. **Start using** — Ishi handles model selection automatically
+
+---
+
+## API Endpoint
+
+All requests go through our OpenAI-compatible endpoint:
+
+```
+https://ishi.pixelml.com/v1/chat/completions
+```
+
+The API follows the OpenAI specification, so existing tools work out of the box.
+
+### Example Request
+
+```bash
+curl https://ishi.pixelml.com/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "semantic-routed-model",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+```
+
+---
+
+## Available Models
+
+| Model                     | ID                      | Type               | Best For                  |
+| ------------------------- | ----------------------- | ------------------ | ------------------------- |
+| **Ishi Intent Engine v1** | `semantic-routed-model` | Intelligent Router | Cost savings with quality |
+| Claude Sonnet 4           | `claude-sonnet-4`       | Premium            | Complex reasoning         |
+| Claude Haiku 3.5          | `claude-3-5-haiku`      | Fast               | Quick responses           |
+| GPT-4o                    | `gpt-4o`                | Premium            | General tasks             |
+| GPT-4o Mini               | `gpt-4o-mini`           | Budget             | Simple tasks              |
+| Gemini 2.0 Flash          | `gemini-2-flash`        | Fast               | Quick responses           |
+
+<Aside type="note">
+  We recommend using **semantic-routed-model** as your default model. It automatically routes to the best model for each
+  task.
+</Aside>
+
+---
+
+## Pricing
+
+Pixel ML OpenRouter uses **pay-as-you-go** pricing. You only pay for the tokens you use.
+
+### Free Credit
+
+Every Ishi customer receives **$1 free credit** upon signup. This is enough for:
+
+- ~100 simple tasks with Ishi routing
+- ~50 medium complexity tasks
+- ~20 complex coding tasks
+
+### Top Up
+
+When your credit runs out:
+
+1. Visit [platform.pixelml.com](https://platform.pixelml.com/)
+2. Sign in with your Ishi account
+3. Add funds via credit card
+
+No subscriptions required—pay only for what you use.
+
+---
+
+## Why Pixel ML OpenRouter?
+
+### Single Gateway
+
+One API key. One billing account. Access to Claude, GPT, Gemini, and more.
+
+### Intelligent Routing
+
+Ishi Intent Engine saves you money by routing simple tasks to cheaper models.
+
+### No Markup
+
+We pass through model costs at the same price as direct providers.
+
+### OpenAI Compatible
+
+Works with any tool that supports the OpenAI API format.
+
+---
+
+## For Teams
+
+Pixel ML OpenRouter supports team features:
+
+- **Shared billing** — One account for your whole team
+- **Usage tracking** — See who's using what
+- **Spending limits** — Set monthly caps per user
+
+Manage your team at [platform.pixelml.com](https://platform.pixelml.com/).
+
+---
+
+## Using Your Own Keys
+
+Already have API keys from OpenAI or Anthropic? You can use them directly in Ishi instead of Pixel ML OpenRouter.
+
+See the [Providers](/docs/providers) page for setup instructions.

@@ -1,0 +1,149 @@
+---
+title: Organize Downloads Automatically
+description: Have Ishi watch your Downloads folder and intelligently sort files.
+---
+
+Your Downloads folder is chaos. PDFs from last year, screenshots named "IMG_4832.png", and invoices buried under random files. Let's fix that in 5 minutes.
+
+---
+
+## What You'll Accomplish
+
+By the end of this guide, Ishi will:
+
+- 📂 Watch your Downloads folder for new files
+- 🏷️ Rename files intelligently (e.g., `Scan001.pdf` → `2025-01-Invoice-Acme.pdf`)
+- 📁 Sort files into organized folders by type and date
+- 👻 Show you a preview before making any changes
+
+---
+
+## Step 1: Open a Conversation
+
+Launch Ishi and start a new conversation. Type:
+
+```
+Watch my Downloads folder and organize files as they arrive
+```
+
+Ishi will ask a few clarifying questions:
+
+- What types of files should I organize?
+- How should I sort them (by date, by type, by vendor)?
+- Should I rename files based on their content?
+
+Answer naturally—Ishi understands plain English.
+
+---
+
+## Step 2: Review the Plan
+
+Before touching any files, Ishi shows you a **plan preview**:
+
+```
+📋 Proposed Organization Plan
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📂 Downloads/
+├── 📁 Invoices/
+│   ├── 2025-01/
+│   └── 2024-12/
+├── 📁 Screenshots/
+├── 📁 Documents/
+└── 📁 Other/
+
+🔄 Proposed Renames:
+• Scan001.pdf → Acme-Corp-Invoice-2025-01-03.pdf
+• IMG_4832.png → Dashboard-Screenshot-2025-01-02.png
+• doc(1).docx → Project-Proposal-Draft.docx
+
+[Approve] [Modify] [Cancel]
+```
+
+This is the **Glass Box** philosophy in action—you see exactly what will happen.
+
+---
+
+## Step 3: See Ghost Files
+
+Before any file is renamed or moved, Ishi shows you a **Ghost File Preview**:
+
+| Current              | Proposed                              |
+| -------------------- | ------------------------------------- |
+| `Scan001.pdf`        | `Acme-Corp-Invoice-2025-01-03.pdf`    |
+| Location: Downloads/ | Location: Downloads/Invoices/2025-01/ |
+
+The "ghost" file appears translucent until you approve. Nothing changes until you say so.
+
+---
+
+## Step 4: Approve or Reject
+
+For each file, you can:
+
+- ✅ **Approve** — Move and rename as proposed
+- ✏️ **Edit** — Modify the proposed name or location
+- ❌ **Skip** — Leave this file alone
+- ✅ **Approve All** — Accept all remaining proposals
+
+---
+
+## Step 5: Set Up Auto-Organize (Optional)
+
+Want Ishi to do this automatically going forward? Ask:
+
+```
+From now on, automatically organize new downloads using this pattern
+```
+
+Ishi will create a **watcher** that:
+
+- Monitors your Downloads folder
+- Proposes organization for new files
+- Notifies you with a summary (you still approve batches)
+
+---
+
+## Safety Features
+
+### Nothing Happens Without Approval
+
+Every file operation shows a preview first. You're always in control.
+
+### Full Undo History
+
+Made a mistake? Every action is logged. Go to **History** and undo any operation.
+
+### Files Stay Local
+
+Your files never leave your computer. Ishi processes everything locally.
+
+---
+
+## Example Prompts
+
+Try these variations based on your preference:
+
+| Goal               | What to Say                                             |
+| ------------------ | ------------------------------------------------------- |
+| Sort by type       | "Organize downloads into folders by file type"          |
+| Sort by date       | "Sort downloads by month and year"                      |
+| Invoices only      | "Find all invoices in Downloads and organize by vendor" |
+| Screenshots        | "Rename screenshots based on what's in the image"       |
+| Aggressive cleanup | "Archive anything older than 30 days"                   |
+
+---
+
+## Tips for Best Results
+
+1. **Be specific about your preferences** — "Sort invoices by vendor name, not by date"
+2. **Start with a small batch** — Test with 10 files before running on everything
+3. **Use the Safety Slider** — Start at "Ask for everything" until you're comfortable
+
+---
+
+## Next Steps
+
+- [Extract Data from PDFs](/docs/use-cases/extract-pdf-data) — Pull invoice data into spreadsheets
+- [Safety & Control](/docs/permissions) — Adjust how much autonomy Ishi has
+- [Undo History](/docs/trust-safety/undo-history) — Learn about the transaction log

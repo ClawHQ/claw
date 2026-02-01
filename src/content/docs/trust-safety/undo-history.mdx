@@ -1,0 +1,156 @@
+---
+title: Undo History
+description: Every action is logged. Undo any change, anytime.
+---
+
+Made a mistake? Approved something you shouldn't have? No problem.
+
+**Every file operation in Ishi is logged.** You can undo any change at any time.
+
+---
+
+## How It Works
+
+### Automatic Transaction Log
+
+Every time Ishi modifies, renames, or moves a file, it records:
+
+- **What changed** — The exact operation performed
+- **When** — Timestamp of the action
+- **Before state** — What the file looked like before
+- **After state** — What it became
+
+This log is stored locally on your machine.
+
+---
+
+## Viewing Your History
+
+### Open the History Panel
+
+In Ishi, access your history through:
+
+- The **History** tab in the sidebar
+- Keyboard shortcut (customizable in [Settings](/docs/keybinds))
+
+### What You'll See
+
+```
+📜 Recent Operations
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Today, 10:32 AM
+├── ✏️ Renamed 23 files in Documents/Invoices
+│   └── [Undo] [View Details]
+│
+├── 📁 Moved 5 files to Archive/2024
+│   └── [Undo] [View Details]
+
+Yesterday, 4:15 PM
+├── 📄 Created summary.csv from 12 PDFs
+│   └── [Undo] [View Details]
+```
+
+---
+
+## Undoing an Operation
+
+### Single File Undo
+
+1. Find the operation in History
+2. Click **Undo**
+3. Confirm the revert
+
+The file returns to its previous state instantly.
+
+### Batch Undo
+
+If you renamed 50 files and want to undo all of them:
+
+1. Find the batch operation
+2. Click **Undo All**
+3. Confirm
+
+All 50 files revert to their original names.
+
+---
+
+## What Can Be Undone
+
+| Operation     | Undoable?  | What Happens                      |
+| ------------- | ---------- | --------------------------------- |
+| File rename   | ✅ Yes     | Original name restored            |
+| File move     | ✅ Yes     | File returns to original location |
+| File edit     | ✅ Yes     | Previous content restored         |
+| File creation | ✅ Yes     | Created file is deleted           |
+| File deletion | ⚠️ Limited | If sent to Trash, can be restored |
+
+<aside type="caution">
+  **Important:** If a file was permanently deleted (bypassing Trash), it cannot be recovered through Undo. This is why
+  Ishi defaults to moving files to Trash rather than permanent deletion.
+</aside>
+
+---
+
+## How Long Is History Kept?
+
+By default, Ishi keeps your operation history for **30 days**.
+
+To change this:
+
+```json title="ishi.json"
+{
+  "history": {
+    "retention_days": 90
+  }
+}
+```
+
+---
+
+## Viewing Operation Details
+
+Click **View Details** on any operation to see exactly what changed:
+
+```
+📋 Operation Details
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Type: Rename
+Time: January 3, 2025 at 10:32 AM
+Files affected: 23
+
+Changes:
+┌────────────────────────────────────────────┐
+│ Before              │ After               │
+├────────────────────────────────────────────┤
+│ IMG_001.png         │ Chart-Revenue.png   │
+│ IMG_002.png         │ Chart-Users.png     │
+│ ...                 │ ...                 │
+└────────────────────────────────────────────┘
+
+[Undo This Operation]
+```
+
+---
+
+## Technical Details
+
+### Where Is History Stored?
+
+The transaction log is stored in SQLite at:
+
+- **macOS:** `~/Library/Application Support/ishi/history.db`
+- **Windows:** `%APPDATA%\ishi\history.db`
+
+### Privacy
+
+Your history never leaves your computer. It's stored locally and never synced to any cloud service.
+
+---
+
+## Related
+
+- [Ghost Files](/docs/trust-safety/ghost-files) — Preview changes before they happen
+- [Safety & Control](/docs/permissions) — Set approval requirements
+- [Privacy](/docs/trust-safety/privacy) — How your data stays local

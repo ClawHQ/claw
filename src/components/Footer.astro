@@ -1,0 +1,50 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default {...Astro.props}>
+  <slot />
+</Default>
+
+<style>
+  /* Hide the Anomaly credit from toolbeam-docs-theme */
+  :global(.footer-credits),
+  :global([data-credits]),
+  :global(.sl-footer a[href*="anoma"]) {
+    display: none !important;
+  }
+</style>
+
+<div class="custom-footer">
+  <p>© 2026 ISHI TECHNOLOGIES PTE. LTD. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://ishi.so/legal/terms-of-service">Terms</a>
+    <a href="https://ishi.so/legal/privacy-policy">Privacy</a>
+    <a href="https://qra.ai/discord">Discord</a>
+  </div>
+</div>
+
+<style>
+  .custom-footer {
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+    border-top: 1px solid var(--sl-color-gray-5);
+    margin-top: 1rem;
+  }
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .footer-links a {
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+  }
+  .footer-links a:hover {
+    color: var(--sl-color-white);
+  }
+</style>

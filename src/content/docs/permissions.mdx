@@ -1,0 +1,187 @@
+---
+title: Safety & Control
+description: Control what Ishi can do and when it needs your approval.
+---
+
+Ishi is designed around the **Glass Box** philosophy: you see everything, you control everything. This page explains how to set your comfort level with Ishi's autonomy.
+
+---
+
+## The Safety Slider
+
+Think of permissions like trust levels with a new employee:
+
+| Level | Name      | How It Works                                              |
+| ----- | --------- | --------------------------------------------------------- |
+| 🟢    | **Allow** | Ishi handles it automatically—no approval needed          |
+| 🟡    | **Ask**   | Ishi shows you what it wants to do and waits for approval |
+| 🔴    | **Deny**  | Ishi can't do this action at all                          |
+
+By default, Ishi asks for approval on sensitive operations. As you build trust, you can grant more autonomy.
+
+---
+
+## What You Can Control
+
+### File Editing
+
+Control whether Ishi can modify your files:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "edit": "ask"
+  }
+}
+```
+
+- **Allow**: Ishi edits files without asking
+- **Ask**: Ishi shows the changes and waits for your "OK" (recommended to start)
+- **Deny**: Ishi can only suggest edits, not make them
+
+---
+
+### Running Commands
+
+Control whether Ishi can run commands on your system:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "bash": "ask"
+  }
+}
+```
+
+You can also set rules for specific commands:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "bash": {
+      "open *": "allow",
+      "mv *": "ask",
+      "rm *": "deny"
+    }
+  }
+}
+```
+
+This example:
+
+- ✅ **Allows** opening files and apps
+- 🟡 **Asks** before moving files
+- 🔴 **Blocks** file deletion entirely
+
+---
+
+### Web Access
+
+Control whether Ishi can fetch information from the web:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "webfetch": "ask"
+  }
+}
+```
+
+---
+
+### Files Outside Your Folder
+
+By default, Ishi asks before touching files outside your current project folder:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "external_directory": "ask"
+  }
+}
+```
+
+This prevents accidental changes to files you didn't intend to work with.
+
+---
+
+## Quick Setup: Conservative Start
+
+New to Ishi? Start with this "ask for everything" configuration:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "edit": "ask",
+    "bash": "ask",
+    "webfetch": "ask",
+    "external_directory": "ask"
+  }
+}
+```
+
+As you get comfortable, you can loosen specific permissions.
+
+---
+
+## Quick Setup: Hands-Off Mode
+
+Ready to let Ishi handle routine tasks? Try this:
+
+```json title="ishi.json"
+{
+  "permission": {
+    "edit": "allow",
+    "bash": {
+      "*": "allow",
+      "rm *": "ask",
+      "sudo *": "deny"
+    },
+    "external_directory": "ask"
+  }
+}
+```
+
+This allows most operations but:
+
+- 🟡 Asks before deleting files
+- 🔴 Blocks admin/system commands
+- 🟡 Asks before touching files outside your project
+
+---
+
+## Session Approvals
+
+When Ishi asks for permission during a session, you'll see three options:
+
+1. **Accept** — Allow this one time
+2. **Accept Always** — Allow this action for the rest of the session
+3. **Deny** — Block this action
+
+"Accept Always" is useful when Ishi needs to do the same thing repeatedly (like opening multiple files).
+
+---
+
+## Where to Put Your Settings
+
+Save your permission settings in one of these locations:
+
+| Location                   | Scope                      |
+| -------------------------- | -------------------------- |
+| `~/.config/ishi/ishi.json` | All your projects (global) |
+| `./ishi.json`              | This project only          |
+
+Project settings override global settings, so you can have stricter rules for sensitive projects.
+
+---
+
+## Summary
+
+| Permission           | What It Controls      | Recommended Start |
+| -------------------- | --------------------- | ----------------- |
+| `edit`               | Modifying files       | Ask               |
+| `bash`               | Running commands      | Ask               |
+| `webfetch`           | Accessing the web     | Ask               |
+| `external_directory` | Files outside project | Ask               |
+
+Start conservative, build trust, then adjust. That's the Glass Box way. 🔍

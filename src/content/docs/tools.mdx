@@ -1,0 +1,229 @@
+---
+title: Capabilities
+description: What Ishi can do for you.
+---
+
+Ishi comes with built-in capabilities that let your AI assistant interact with your files and system. Think of these as the "skills" your Digital Employee has.
+
+---
+
+## Core Capabilities
+
+Here's what Ishi can do out of the box:
+
+| Capability      | What It Does              | Example                             |
+| --------------- | ------------------------- | ----------------------------------- |
+| 📖 **Read**     | View file contents        | "Show me what's in this PDF"        |
+| ✏️ **Edit**     | Modify existing files     | "Update the date in this invoice"   |
+| 📝 **Write**    | Create new files          | "Create a summary document"         |
+| 🔍 **Search**   | Find content across files | "Find all mentions of 'Acme Corp'"  |
+| 📂 **List**     | See what's in a folder    | "What files are in my Downloads?"   |
+| 🌐 **Web**      | Fetch information online  | "Look up the current exchange rate" |
+| ⚡ **Commands** | Run system commands       | "Open this file in Preview"         |
+
+---
+
+## Enabling & Disabling
+
+All capabilities are **enabled by default**. You can turn specific ones off if needed:
+
+```json title="ishi.json"
+{
+  "tools": {
+    "bash": false,
+    "webfetch": false
+  }
+}
+```
+
+This would prevent Ishi from running commands or accessing the web.
+
+---
+
+## Capability Details
+
+### 📖 Read Files
+
+Ishi can read the contents of files on your computer.
+
+**Use cases:**
+
+- Extract text from PDFs and documents
+- Review spreadsheet data
+- Check file contents before organizing
+
+```json title="ishi.json"
+{
+  "tools": {
+    "read": true
+  }
+}
+```
+
+---
+
+### ✏️ Edit Files
+
+Ishi can modify existing files—but only with your approval (see [Safety & Control](/docs/permissions)).
+
+**Use cases:**
+
+- Update dates or text in documents
+- Fix formatting issues
+- Bulk-update file metadata
+
+```json title="ishi.json"
+{
+  "tools": {
+    "edit": true
+  }
+}
+```
+
+---
+
+### 📝 Create Files
+
+Ishi can create new files and documents.
+
+**Use cases:**
+
+- Generate summary reports
+- Create organized folder structures
+- Export data to new spreadsheets
+
+```json title="ishi.json"
+{
+  "tools": {
+    "write": true
+  }
+}
+```
+
+---
+
+### 🔍 Search Files
+
+Ishi can search through your files to find specific content.
+
+**Use cases:**
+
+- Find all invoices from a specific vendor
+- Locate files containing certain keywords
+- Search for patterns across documents
+
+```json title="ishi.json"
+{
+  "tools": {
+    "grep": true,
+    "glob": true
+  }
+}
+```
+
+---
+
+### 📂 List Folders
+
+Ishi can see what's inside folders and directories.
+
+**Use cases:**
+
+- Survey what's in your Downloads folder
+- Identify duplicate or similar files
+- Get an overview of project organization
+
+```json title="ishi.json"
+{
+  "tools": {
+    "list": true
+  }
+}
+```
+
+---
+
+### 🌐 Web Access
+
+Ishi can fetch information from the web.
+
+**Use cases:**
+
+- Look up current information (exchange rates, etc.)
+- Check documentation or reference materials
+- Verify data against online sources
+
+```json title="ishi.json"
+{
+  "tools": {
+    "webfetch": true
+  }
+}
+```
+
+---
+
+### ⚡ System Commands
+
+Ishi can run commands on your system.
+
+**Use cases:**
+
+- Open files in specific applications
+- Organize files and folders
+- Run automation scripts
+
+```json title="ishi.json"
+{
+  "tools": {
+    "bash": true
+  }
+}
+```
+
+:::tip[Safety First]
+We recommend setting `bash` to require approval until you're comfortable with what Ishi does. See [Safety & Control](/docs/permissions).
+:::
+
+---
+
+## Task Tracking
+
+Ishi can maintain a to-do list while working on complex tasks:
+
+```json title="ishi.json"
+{
+  "tools": {
+    "todowrite": true,
+    "todoread": true
+  }
+}
+```
+
+This helps Ishi stay organized when you ask it to do multi-step operations like "organize all my Q4 invoices by vendor."
+
+---
+
+## Extending Capabilities
+
+Want Ishi to do more? You can add new capabilities through:
+
+- [Custom Tools](/docs/custom-tools) — Define your own actions
+- [MCP Servers](/docs/mcp-servers) — Connect to external services and databases
+
+---
+
+## Summary
+
+| Capability      | Config Key              | Default    |
+| --------------- | ----------------------- | ---------- |
+| Read files      | `read`                  | ✅ Enabled |
+| Edit files      | `edit`                  | ✅ Enabled |
+| Create files    | `write`                 | ✅ Enabled |
+| Search content  | `grep`, `glob`          | ✅ Enabled |
+| List folders    | `list`                  | ✅ Enabled |
+| Web access      | `webfetch`              | ✅ Enabled |
+| System commands | `bash`                  | ✅ Enabled |
+| Task tracking   | `todowrite`, `todoread` | ✅ Enabled |
+
+All capabilities can be controlled with [Safety & Control](/docs/permissions) settings. 🔒

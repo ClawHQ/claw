@@ -1,0 +1,137 @@
+---
+title: Ghost Files
+description: See exactly what will happen before any file is changed.
+---
+
+import { Aside } from "@astrojs/starlight/components"
+
+Other AI tools are "magic boxes"—you ask for something, and _something happens_. You cross your fingers and hope.
+
+**Ishi is a Glass Box.** You see everything before it happens.
+
+---
+
+## What Are Ghost Files?
+
+When Ishi proposes a change to your files, it shows a **Ghost File**—a translucent preview of what the result will look like.
+
+```
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│  📂 Downloads/                                      │
+│  ├── 📄 Scan001.pdf                                │
+│  │                                                  │
+│  │   👻 ─────────────────────────────────          │
+│  │   │ 📄 Acme-Invoice-2025-01-03.pdf  │          │
+│  │   └─────────────────────────────────            │
+│  │        ↑ Ghost Preview (not yet real)           │
+│  │                                                  │
+│  └── 📄 Document.docx                              │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+The ghost shows you the **exact outcome** at **zero risk**.
+
+---
+
+## How It Works
+
+### 1. You Make a Request
+
+```
+Rename all invoices to include the vendor name and date
+```
+
+### 2. Ishi Simulates the Changes
+
+Ishi analyzes your files and calculates what would happen—but **doesn't execute anything yet**.
+
+### 3. You See the Ghost Preview
+
+Every file that would be affected shows:
+
+- **Current state** — What exists now
+- **Ghost state** — What it would become
+- **The difference** — What's changing
+
+### 4. You Approve or Reject
+
+- ✅ **Approve** — The ghost becomes real
+- ❌ **Reject** — Nothing happens, file untouched
+
+---
+
+## The Diff View
+
+For file modifications (not just renames), you see a full diff:
+
+```diff
+  Contract between Acme Corp and Client
+
+- Payment due: NET 30
++ Payment due: NET 15
+
+  Deliverables:
+- - Phase 1: Design (March 1)
++ - Phase 1: Design (February 15)
+- - Phase 2: Development (April 1)
++ - Phase 2: Development (March 15)
+```
+
+Red lines show what's being removed. Green lines show what's being added.
+
+---
+
+## Why This Matters
+
+<Aside type="tip" title='The Problem with "Magic" AI'>
+  Most AI tools hide what they're doing. You type a command and hope for the best. Then you discover it renamed your
+  important files incorrectly, or worse—deleted something.
+</Aside>
+
+Ishi's Glass Box approach means:
+
+- **No surprises** — You see exactly what will happen
+- **No accidents** — Nothing executes without your approval
+- **No anxiety** — You're always in control
+
+---
+
+## Batch Previews
+
+When working with many files, Ishi groups the previews:
+
+```
+📋 Batch Preview: 47 files to rename
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Sample changes:
+• IMG_001.png → Dashboard-Chart.png
+• IMG_002.png → Login-Screen.png
+• IMG_003.png → Settings-Panel.png
+
+[See All 47] [Approve All] [Review One-by-One]
+```
+
+You can review everything or trust the pattern after checking samples.
+
+---
+
+## Ghost Files + Undo
+
+Even after you approve, every action is logged. If the result isn't what you expected:
+
+1. Open **History**
+2. Find the operation
+3. Click **Undo**
+
+The ghost becomes real, but you can always revert.
+
+---
+
+## Related
+
+- [Safety & Control](/docs/permissions) — Set approval levels
+- [Undo History](/docs/trust-safety/undo-history) — Revert any change
+- [Privacy](/docs/trust-safety/privacy) — How your data stays local

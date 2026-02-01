@@ -1,0 +1,331 @@
+---
+title: CLI
+description: Ishi CLI options and commands.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components"
+
+The Ishi CLI by default starts the [TUI](/docs/tui) when run without any arguments.
+
+```bash
+ishi
+```
+
+But it also accepts commands as documented on this page. This allows you to interact with Ishi programmatically.
+
+```bash
+ishi run "Explain how closures work in JavaScript"
+```
+
+---
+
+### tui
+
+Start the Ishi terminal user interface.
+
+```bash
+claw [project]
+```
+
+#### Flags
+
+| Flag         | Short | Description                                |
+| ------------ | ----- | ------------------------------------------ |
+| `--continue` | `-c`  | Continue the last session                  |
+| `--session`  | `-s`  | Session ID to continue                     |
+| `--prompt`   | `-p`  | Prompt to use                              |
+| `--model`    | `-m`  | Model to use in the form of provider/model |
+| `--agent`    |       | Agent to use                               |
+| `--port`     |       | Port to listen on                          |
+| `--hostname` |       | Hostname to listen on                      |
+
+---
+
+## Commands
+
+The Ishi CLI also has the following commands.
+
+---
+
+### agent
+
+Manage agents for Ishi.
+
+```bash
+ishi agent [command]
+```
+
+---
+
+#### create
+
+Create a new agent with custom configuration.
+
+```bash
+ishi agent create
+```
+
+This command will guide you through creating a new agent with a custom system prompt and tool configuration.
+
+---
+
+### auth
+
+Command to manage credentials and login for providers.
+
+```bash
+ishi auth [command]
+```
+
+---
+
+#### login
+
+Ishi is powered by the provider list at [Models.dev](https://models.dev), so you can use `ishi auth login` to configure API keys for any provider you'd like to use. This is stored in `~/.local/share/ishi/auth.json`.
+
+```bash
+ishi auth login
+```
+
+When Ishi starts up it loads the providers from the credentials file. And if there are any keys defined in your environments or a `.env` file in your project.
+
+---
+
+#### list
+
+Lists all the authenticated providers as stored in the credentials file.
+
+```bash
+ishi auth list
+```
+
+Or the short version.
+
+```bash
+ishi auth ls
+```
+
+---
+
+#### logout
+
+Logs you out of a provider by clearing it from the credentials file.
+
+```bash
+ishi auth logout
+```
+
+---
+
+### github
+
+Manage the GitHub agent for repository automation.
+
+```bash
+ishi github [command]
+```
+
+---
+
+#### install
+
+Install the GitHub agent in your repository.
+
+```bash
+ishi github install
+```
+
+This sets up the necessary GitHub Actions workflow and guides you through the configuration process. [Learn more](/docs/github).
+
+---
+
+#### run
+
+Run the GitHub agent. This is typically used in GitHub Actions.
+
+```bash
+ishi github run
+```
+
+##### Flags
+
+| Flag      | Description                            |
+| --------- | -------------------------------------- |
+| `--event` | GitHub mock event to run the agent for |
+| `--token` | GitHub personal access token           |
+
+---
+
+### models
+
+List all available models from configured providers.
+
+```bash
+ishi models [provider]
+```
+
+This command displays all models available across your configured providers in the format `provider/model`.
+
+This is useful for figuring out the exact model name to use in [your config](/docs/config/).
+
+You can optionally pass a provider ID to filter models by that provider.
+
+```bash
+ishi models anthropic
+```
+
+#### Flags
+
+| Flag        | Description                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `--refresh` | Refresh the models cache from models.dev                     |
+| `--verbose` | Use more verbose model output (includes metadata like costs) |
+
+Use the `--refresh` flag to update the cached model list. This is useful when new models have been added to a provider and you want to see them in Ishi.
+
+```bash
+ishi models --refresh
+```
+
+---
+
+### run
+
+Run ishi in non-interactive mode by passing a prompt directly.
+
+```bash
+ishi run [message..]
+```
+
+This is useful for scripting, automation, or when you want a quick answer without launching the full TUI. For example.
+
+```bash "ishi run"
+ishi run Explain the use of context in Go
+```
+
+You can also attach to a running `ishi serve` instance to avoid MCP server cold boot times on every run:
+
+```bash
+# Start a headless server in one terminal
+ishi serve
+
+# In another terminal, run commands that attach to it
+ishi run --attach http://localhost:4096 "Explain async/await in JavaScript"
+```
+
+#### Flags
+
+| Flag         | Short | Description                                                        |
+| ------------ | ----- | ------------------------------------------------------------------ |
+| `--command`  |       | The command to run, use message for args                           |
+| `--continue` | `-c`  | Continue the last session                                          |
+| `--session`  | `-s`  | Session ID to continue                                             |
+| `--share`    |       | Share the session                                                  |
+| `--model`    | `-m`  | Model to use in the form of provider/model                         |
+| `--agent`    |       | Agent to use                                                       |
+| `--file`     | `-f`  | File(s) to attach to message                                       |
+| `--format`   |       | Format: default (formatted) or json (raw JSON events)              |
+| `--title`    |       | Title for the session (uses truncated prompt if no value provided) |
+| `--attach`   |       | Attach to a running ishi server (e.g., http://localhost:4096)      |
+| `--port`     |       | Port for the local server (defaults to random port)                |
+
+---
+
+### serve
+
+Start a headless ishi server for API access. Check out the [server docs](/docs/server) for the full HTTP interface.
+
+```bash
+ishi serve
+```
+
+This starts an HTTP server that provides API access to ishi functionality without the TUI interface.
+
+#### Flags
+
+| Flag         | Short | Description           |
+| ------------ | ----- | --------------------- |
+| `--port`     | `-p`  | Port to listen on     |
+| `--hostname` |       | Hostname to listen on |
+
+---
+
+### upgrade
+
+Updates ishi to the latest version or a specific version.
+
+```bash
+ishi upgrade [target]
+```
+
+To upgrade to the latest version.
+
+```bash
+ishi upgrade
+```
+
+To upgrade to a specific version.
+
+```bash
+ishi upgrade v0.1.48
+```
+
+#### Flags
+
+| Flag       | Short | Description                                                       |
+| ---------- | ----- | ----------------------------------------------------------------- |
+| `--method` | `-m`  | The installation method that was used; curl, npm, pnpm, bun, brew |
+
+---
+
+## Global Flags
+
+The ishi CLI takes the following global flags.
+
+| Flag           | Short | Description                          |
+| -------------- | ----- | ------------------------------------ |
+| `--help`       | `-h`  | Display help                         |
+| `--version`    | `-v`  | Print version number                 |
+| `--print-logs` |       | Print logs to stderr                 |
+| `--log-level`  |       | Log level (DEBUG, INFO, WARN, ERROR) |
+
+---
+
+## Environment variables
+
+Ishi can be configured using environment variables.
+
+| Variable                          | Type    | Description                              |
+| --------------------------------- | ------- | ---------------------------------------- |
+| `CLAW_AUTO_SHARE`                 | boolean | Automatically share sessions             |
+| `CLAW_GIT_BASH_PATH`              | string  | Path to Git Bash executable on Windows   |
+| `ISHI_CONFIG`                     | string  | Path to config file                      |
+| `ISHI_CONFIG_DIR`                 | string  | Path to config directory                 |
+| `ISHI_CONFIG_CONTENT`             | string  | Inline json config content               |
+| `CLAW_DISABLE_AUTOUPDATE`         | boolean | Disable automatic update checks          |
+| `CLAW_DISABLE_PRUNE`              | boolean | Disable pruning of old data              |
+| `CLAW_DISABLE_TERMINAL_TITLE`     | boolean | Disable automatic terminal title updates |
+| `CLAW_PERMISSION`                 | string  | Inlined json permissions config          |
+| `CLAW_DISABLE_DEFAULT_PLUGINS`    | boolean | Disable default plugins                  |
+| `ISHI_DISABLE_LSP_DOWNLOAD`       | boolean | Disable automatic LSP server downloads   |
+| `CLAW_ENABLE_EXPERIMENTAL_MODELS` | boolean | Enable experimental models               |
+| `CLAW_DISABLE_AUTOCOMPACT`        | boolean | Disable automatic context compaction     |
+| `CLAW_CLIENT`                     | string  | Client identifier (defaults to `cli`)    |
+| `CLAW_ENABLE_EXA`                 | boolean | Enable Exa web search tools              |
+
+---
+
+### Experimental
+
+These environment variables enable experimental features that may change or be removed.
+
+| Variable                                    | Type    | Description                             |
+| ------------------------------------------- | ------- | --------------------------------------- |
+| `CLAW_EXPERIMENTAL`                         | boolean | Enable all experimental features        |
+| `CLAW_EXPERIMENTAL_ICON_DISCOVERY`          | boolean | Enable icon discovery                   |
+| `CLAW_EXPERIMENTAL_DISABLE_COPY_ON_SELECT`  | boolean | Disable copy on select in TUI           |
+| `CLAW_EXPERIMENTAL_BASH_MAX_OUTPUT_LENGTH`  | number  | Max output length for bash commands     |
+| `CLAW_EXPERIMENTAL_BASH_DEFAULT_TIMEOUT_MS` | number  | Default timeout for bash commands in ms |
+| `CLAW_EXPERIMENTAL_OUTPUT_TOKEN_MAX`        | number  | Max output tokens for LLM responses     |
+| `CLAW_EXPERIMENTAL_FILEWATCHER`             | boolean | Enable file watcher for entire dir      |
+| `CLAW_EXPERIMENTAL_OXFMT`                   | boolean | Enable oxfmt formatter                  |

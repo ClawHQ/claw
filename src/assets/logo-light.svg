@@ -1,0 +1,15 @@
+<svg width="640" height="100" viewBox="0 0 640 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g>
+<!-- C - Block style -->
+<path d="M10 10H100V25H25V75H100V90H10V10Z" fill="black"/>
+
+<!-- L - Block style -->
+<path d="M120 10H135V75H190V90H120V10Z" fill="black"/>
+
+<!-- A - Block style with hole -->
+<path d="M210 90V10H310V90H295V55H225V90H210ZM225 25V40H295V25H225Z" fill="black"/>
+
+<!-- W - Perfect W from ASCII art -->
+<path d="M330 10H345V60H360V10H375V60H390V10H405V60H420V10H435V75H405V90H375V75H360V90H330V75H330V10Z" fill="black"/>
+</g>
+</svg>
