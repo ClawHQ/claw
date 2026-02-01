@@ -3,18 +3,13 @@
   "outputDirectory": "dist",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "astro",
-  "regions": ["sin1"],
+  "regions": [
+    "sin1"
+  ],
   "env": {
-    "NODE_ENV": "production",
-    "VITE_API_URL": "https://api.ishi.so"
+    "NODE_ENV": "production"
   },
   "git": {
     "deploymentEnabled": true
-  },
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-  "functions": {
-    "**": {
-      "runtime": "nodejs20.x"
-    }
   }
 }
