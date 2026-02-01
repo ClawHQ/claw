@@ -68,6 +68,11 @@ export default defineConfig({
           label: "OpenClaw",
           items: ["openclaw-setup", "slack-integration", "deployment"],
         },
+        {
+          label: "OpenClaw Engine",
+          collapsed: true,
+          autogenerate: { directory: "engine" },
+        },
         "troubleshooting",
       ],
       components: {
