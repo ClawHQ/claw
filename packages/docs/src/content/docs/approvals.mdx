@@ -1,0 +1,32 @@
+---
+title: Human-in-the-Loop Approvals
+description: Approve or reject blocked agent actions.
+---
+
+When your OpenClaw agent encounters an action that requires approval, it pauses and waits for your decision in Claw Desktop.
+
+## How It Works
+
+1. Agent reaches a blocked action (e.g., destructive file operation, external API call)
+2. Run status changes to **Blocked** (yellow)
+3. You see the blocked action in the Run Timeline
+4. Click **Approve** or **Reject** inline
+5. Agent resumes automatically after your decision
+
+## Approval Interface
+
+Blocked actions appear as highlighted cards in the timeline showing:
+- **Action Type** — What the agent wants to do
+- **Parameters** — Details of the action
+- **Context** — Why the agent wants to do this
+
+## Approve/Reject
+
+- **Approve** — Agent proceeds with the action
+- **Reject** — Agent skips the action and may try an alternative
+
+Your decision is sent to OpenClaw and the run continues immediately.
+
+## Offline Behavior
+
+When offline, approval buttons are disabled with a tooltip explaining you need to reconnect to take action.

@@ -1,0 +1,44 @@
+---
+title: OpenClaw Setup
+description: Set up your OpenClaw instance to use with Claw Desktop.
+---
+
+OpenClaw is the remote agent that Claw Desktop connects to. This guide covers setting up your own OpenClaw instance.
+
+## What is OpenClaw?
+
+OpenClaw is an AI agent that runs on your server and executes tasks autonomously. It:
+- Runs 24/7 on your infrastructure
+- Connects to Slack for conversational interaction
+- Exposes a WebSocket API for Claw Desktop
+
+## Deployment Options
+
+### DigitalOcean
+One-click deployment via Docker Compose.
+
+### Cloudflare Workers
+Serverless deployment using Cloudflare Sandbox.
+
+### Self-Hosted
+Docker Compose on any Linux server with Docker installed.
+
+## Quick Start
+
+```bash
+# Clone the OpenClaw repo
+git clone https://github.com/openclaw/openclaw
+
+# Configure environment
+cp .env.example .env
+# Edit .env with your settings
+
+# Start the agent
+docker compose up -d
+```
+
+Your OpenClaw instance will be available at `ws://your-server:8080`.
+
+## Configuration
+
+See the [OpenClaw documentation](https://github.com/openclaw) for full configuration options.

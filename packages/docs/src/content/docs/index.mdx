@@ -1,123 +1,150 @@
 ---
 title: Getting Started
-description: Get your Digital Employee up and running in 5 minutes.
+description: Get your operator cockpit connected to OpenClaw in 5 minutes.
 ---
 
 import { Tabs, TabItem } from "@astrojs/starlight/components"
-import config from "../../../config.mjs"
-export const console = config.console
 
-[**Ishi**](/) is your **Digital Employee**—a Desktop AI that bridges your local files and cloud power. It's the "Hands" to the AI "Brain," automating business operations you'd otherwise do manually.
+**Claw Desktop** is the operator cockpit for [OpenClaw](https://github.com/openclaw) agents. Your agent runs remotely—on DigitalOcean, Cloudflare, or your own server—working overnight while you chat via Slack. When you're back at your desk, open Claw Desktop to review what happened, check the diffs, and resume exactly where your agent left off.
 
-### See Ishi in Action
+## Why Claw Desktop?
 
-<div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden" }}>
-  <iframe
-    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
-    src="https://www.youtube.com/embed/9QMHYkn59cE"
-    title="Meet Ishi"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  ></iframe>
-</div>
+Stop scrolling through Slack history to find what your agent did overnight. Claw Desktop gives you:
 
-Let's get your new team member set up.
+- **While-You-Were-Away Sync** — See exactly what changed since you last opened the app
+- **Artifact Review** — Diffs, outputs, and verification checklists in one place
+- **One-Click Resume** — Continue the same `run_id` across Slack and Desktop
+- **Human-in-the-Loop Approvals** — Approve or reject blocked actions inline
 
 ---
 
-## Download the Desktop App
-
-The fastest way to start is with the Ishi Desktop App:
+## Download
 
 | Platform              | Download                                                        |
 | --------------------- | --------------------------------------------------------------- |
-| macOS (Apple Silicon) | [Download .dmg](https://ishi.so/download?platform=darwin-arm64) |
-| macOS (Intel)         | [Download .dmg](https://ishi.so/download?platform=darwin-x64)   |
-| Windows               | [Download .exe](https://ishi.so/download?platform=win-x64)      |
+| macOS (Apple Silicon) | [Download .dmg](https://claw.so/download?platform=darwin-arm64) |
+| macOS (Intel)         | [Download .dmg](https://claw.so/download?platform=darwin-x64)   |
+| Windows               | [Download .exe](https://claw.so/download?platform=win-x64)      |
 
-Or grab it from the [releases page](https://github.com/PixelML/ishi/releases).
-
----
-
-## Connect Your AI
-
-Ishi needs an AI provider to power its intelligence. We recommend **Ishi Intent Engine** for the easiest setup—it's included with your license and automatically routes tasks to the best model.
-
-1. Open Ishi and run `/connect`
-2. Select **Ishi** and sign in at [ishi.so/auth](https://ishi.so/auth)
-3. Add billing details and copy your API key
-4. Paste when prompted—you're ready to go!
-
-Already have an API key from Anthropic, OpenAI, or Google? [Connect any provider](/docs/providers).
+Or grab it from the [releases page](https://github.com/ClawHQ/claw/releases).
 
 ---
 
-## What Ishi Does
+## Connect to Your OpenClaw Instance
 
-Your Digital Employee can handle the operational tasks that eat up your day:
+Claw Desktop connects to your OpenClaw instance via WebSocket. You'll need:
 
-### 📁 Smart File Organization
+1. **Host URL** — Where your OpenClaw is running (e.g., `ws://your-server:8080`)
+2. **API Token** — Your OpenClaw API token for authentication
 
-Tell Ishi to watch your Downloads folder. When files arrive, it proposes intelligent renames and organization:
+### Setup Steps
 
-- `Scan_001.pdf` → `2025-01-Invoice-Acme-Corp.pdf`
-- `Screenshot 2025-01-03.png` → `Homepage-Redesign-Draft.png`
+1. Launch Claw Desktop
+2. Enter your Host URL and API Token
+3. Click **Test Connection** to verify
+4. Save your connection settings
 
-### 👻 Ghost Files (Preview Before Commit)
-
-Ishi **never touches your files without approval**. Every proposed change shows a preview:
-
-- **Before:** Current file/folder state
-- **After:** What it will look like
-- **Your choice:** Approve or reject
-
-This is the "Glass Box" philosophy—you see everything before it happens.
-
-### 🎚️ Safety Slider
-
-Control how much autonomy Ishi has:
-
-- **Level 1 (Intern):** "Ask me before doing anything"
-- **Level 2 (Associate):** "Handle routine tasks, ask for important ones"
-- **Level 3 (Partner):** "Just get it done and notify me"
-
-### ↩️ Undo Everything
-
-Made a mistake? Every action is logged. Undo any change with one click.
-
-### ☁️ Cloud Bridge
-
-Connect your local files to cloud workflows. Drag files onto AgenticFlow integrations to sync with 2,500+ apps like Notion, Airtable, and Google Sheets.
+You can add multiple OpenClaw hosts and switch between them.
 
 ---
 
-## Example Tasks
+## How It Works
 
-Here's what operators use Ishi for:
+```
+┌─────────────────┐      ┌──────────────────┐      ┌─────────────────┐
+│   Your Slack    │◄────►│    OpenClaw      │◄────►│  Claw Desktop   │
+│  (Chat while    │      │  (Runs 24/7 on   │      │  (Review when   │
+│   you sleep)    │      │   your server)   │      │   you're back)  │
+└─────────────────┘      └──────────────────┘      └─────────────────┘
+```
 
-| Task                      | What to Ask                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| 📂 **Organize invoices**  | "Watch my Downloads folder and sort invoices by vendor and date" |
-| 📄 **Extract PDF data**   | "Read this contract and extract deliverables into a spreadsheet" |
-| 🖼️ **Rename screenshots** | "Rename these screenshots based on their content"                |
-| 📊 **Reconcile data**     | "Compare this Excel file with my Stripe transactions"            |
-| 🔒 **Sanitize files**     | "Remove metadata from these images before I share them"          |
+1. **Deploy OpenClaw** on DigitalOcean, Cloudflare, or your infrastructure
+2. **Chat via Slack** to kick off runs and monitor progress
+3. **Open Claw Desktop** to review artifacts, approve blocked actions, and resume
+
+Your `run_id` stays consistent across all interfaces. Context is never lost.
+
+---
+
+## Core Features
+
+### Runs Inbox
+
+See all your runs at a glance:
+- **Status chips** — Running (blue), Blocked (yellow), Done (green), Failed (red)
+- **Filter tabs** — All, Running, Blocked, Done
+- **While You Were Away** — Updates since your last session, newest first
+
+### Run Timeline
+
+Chronological view of everything that happened:
+- **Messages** — User and assistant messages with timestamps
+- **Tool Calls** — Collapsed cards showing tool name, expandable for params/results
+- **File Diffs** — Syntax-highlighted patches showing exactly what changed
+
+### Artifact Panel
+
+Right panel with three tabs:
+- **Plan** — The agent's plan (PLAN.md)
+- **Summary** — What was accomplished (SUMMARY.md)
+- **Verify** — Verification checklist (VERIFICATION.md)
+
+### Human-in-the-Loop
+
+When your agent is blocked on an action:
+- See the blocked action in the timeline
+- Click **Approve** or **Reject** inline
+- Run continues automatically after your decision
+
+---
+
+## Architecture
+
+Claw Desktop follows a 4-tier architecture:
+
+```
+┌───────────────────────────────────────────────────────────┐
+│                         UI Layer                          │
+│            (SolidJS Components + Reactive Stores)         │
+├───────────────────────────────────────────────────────────┤
+│                     Sync Engine                           │
+│          (Cursor-based polling every 5 seconds)           │
+├───────────────────────────────────────────────────────────┤
+│                     Persistence                           │
+│   (File-system: ~/Documents/ClawWorkspace/RUNS/<id>/)     │
+├───────────────────────────────────────────────────────────┤
+│                   OpenClaw Adapter                        │
+│           (WebSocket V3 Protocol Translation)             │
+└───────────────────────────────────────────────────────────┘
+```
+
+### File-System Persistence
+
+All run data is stored locally in `~/Documents/ClawWorkspace/`:
+
+```
+ClawWorkspace/
+└── RUNS/
+    └── <run_id>/
+        ├── meta.json       # Run metadata
+        ├── events.jsonl    # Append-only event log
+        └── ARTIFACTS/      # Downloaded artifacts
+```
+
+You can browse this workspace in Finder without the app.
 
 ---
 
 ## Get Help
 
-- **Documentation:** Browse the sidebar to learn more
-- **Discord:** [Join the community](https://qra.ai/discord)
-- **Support:** [ishi.so/support](https://ishi.so/support)
+- **Documentation** — Browse the sidebar for detailed guides
+- **Discord** — [Join the community](https://discord.gg/claw)
+- **GitHub** — [ClawHQ/claw](https://github.com/ClawHQ/claw)
 
 ---
 
-## Customize
+## What's Next?
 
-Ready to make Ishi your own?
-
-- [Safety & Control](/docs/permissions) — Set approval requirements
-- [Themes](/docs/themes) — Pick your visual style
-- [Keyboard Shortcuts](/docs/keybinds) — Speed up your workflow
+- [Connecting to OpenClaw](/docs/connection) — Detailed connection setup
+- [Runs Inbox](/docs/runs) — Managing your runs
+- [Human-in-the-Loop](/docs/approvals) — Approval workflows

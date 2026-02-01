@@ -1,0 +1,32 @@
+---
+title: Connection
+description: Connect Claw Desktop to your OpenClaw instance.
+---
+
+Connect Claw Desktop to your OpenClaw instance to start reviewing and resuming agent runs.
+
+## Prerequisites
+
+- An OpenClaw instance running and accessible
+- Your OpenClaw API token
+
+## Connection Setup
+
+1. Open Claw Desktop
+2. Enter your **Host URL** (e.g., `wss://your-server.com:8080`)
+3. Enter your **API Token**
+4. Click **Test Connection** to verify
+
+Once connected, Claw Desktop will perform a V3 WebSocket handshake and receive a device token for persistent authentication.
+
+## Multiple Hosts
+
+You can add and manage multiple OpenClaw hosts. Switch between them from the connection dropdown in the sidebar.
+
+## Troubleshooting
+
+If connection fails:
+- Ensure your OpenClaw instance is running
+- Check that the Host URL is correct (include `wss://` for secure connections)
+- Verify your API token hasn't expired
+- Check network connectivity (firewall, VPN, etc.)

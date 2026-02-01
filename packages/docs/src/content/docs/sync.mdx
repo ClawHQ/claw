@@ -1,0 +1,36 @@
+---
+title: Sync Engine
+description: How Claw Desktop keeps your runs up to date.
+---
+
+Claw Desktop continuously syncs with your OpenClaw instance to keep you up to date.
+
+## How Sync Works
+
+- **Polling** — App polls OpenClaw every 5 seconds for new events
+- **Cursor-based** — Only fetches events after your last known cursor (incremental)
+- **Reactive** — New events appear in the timeline without page refresh
+
+## Sync Modes
+
+### Global Inbox Sync
+On app start, Claw Desktop syncs all run statuses in the background. This powers the "While You Were Away" feature.
+
+### Per-Run Sync
+When you open a run detail view, a focused sync fetches the full event history for that run.
+
+## While You Were Away
+
+When you reopen Claw Desktop, you'll see a summary of what changed since your last session:
+- Runs that became blocked
+- Runs that completed
+- Runs that failed
+
+Updates are sorted newest first, with blocked runs prioritized.
+
+## File-System Storage
+
+All synced data is stored locally in `~/Documents/ClawWorkspace/RUNS/<run_id>/`:
+- `meta.json` — Run metadata and sync cursor
+- `events.jsonl` — Append-only event log
+- `ARTIFACTS/` — Downloaded artifacts

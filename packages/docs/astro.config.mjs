@@ -62,46 +62,18 @@ export default defineConfig({
       sidebar: [
         "",
         {
-          label: "Use Cases",
-          items: ["use-cases/organize-downloads", "use-cases/extract-pdf-data", "use-cases/rename-files"],
+          label: "Getting Started",
+          items: ["connection", "runs", "approvals"],
         },
         {
-          label: "Trust & Safety",
-          items: ["trust-safety/ghost-files", "trust-safety/undo-history", "permissions"],
+          label: "Features",
+          items: ["sync", "artifacts", "offline"],
         },
         {
-          label: "Capabilities",
-          items: ["tools", "skills", "mcp-servers"],
-        },
-        {
-          label: "Connect",
-          items: ["providers", "pixelml", "network"],
-        },
-        {
-          label: "Customize",
-          items: [
-            "config",
-            "rules",
-            "agents",
-            "models",
-            "themes",
-            "keybinds",
-            "commands",
-            "formatters",
-            "custom-tools",
-          ],
-        },
-        {
-          label: "Interfaces",
-          items: ["tui", "cli", "ide", "github", "gitlab"],
-        },
-        {
-          label: "Advanced",
-          items: ["sdk", "server", "plugins", "ecosystem", "enterprise", "acp", "lsp"],
+          label: "OpenClaw",
+          items: ["openclaw-setup", "slack-integration", "deployment"],
         },
         "troubleshooting",
-        // "share", - disabled, requires API config
-        // "1-0", - removed, not applicable
       ],
       components: {
         Hero: "./src/components/Hero.astro",

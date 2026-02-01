@@ -1,0 +1,50 @@
+---
+title: Deployment
+description: Deploy OpenClaw to production.
+---
+
+This guide covers deploying OpenClaw to various platforms.
+
+## Deployment Options
+
+| Platform | Pros | Cons |
+|----------|------|------|
+| DigitalOcean | Simple, affordable | Manual scaling |
+| Cloudflare | Serverless, global | Sandbox limitations |
+| Self-hosted | Full control | Maintenance burden |
+
+## DigitalOcean Droplet
+
+### Setup
+
+1. Create a Droplet (2GB+ RAM recommended)
+2. SSH into your droplet
+3. Install Docker and Docker Compose
+4. Clone and configure OpenClaw
+5. Run `docker compose up -d`
+
+### Networking
+
+- Enable firewall (UFW)
+- Allow ports 22 (SSH), 8080 (WebSocket)
+- Consider adding a reverse proxy (Caddy/Nginx) for HTTPS
+
+## Cloudflare Workers
+
+See [Moltworker documentation](https://github.com/openclaw/moltworker) for serverless deployment.
+
+## Self-Hosted
+
+### Requirements
+
+- Linux server (Ubuntu 22.04+ recommended)
+- Docker 24.0+
+- Docker Compose V2
+- 2GB+ RAM
+- Public IP or VPN access
+
+### Security
+
+- Use strong API tokens
+- Enable HTTPS via reverse proxy
+- Consider Tailscale for private network access

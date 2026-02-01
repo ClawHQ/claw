@@ -1,0 +1,50 @@
+---
+title: Slack Integration
+description: Connect OpenClaw to Slack for conversational agent control.
+---
+
+OpenClaw integrates with Slack so you can chat with your agent from anywhere.
+
+## How It Works
+
+1. Add the OpenClaw Slack app to your workspace
+2. Mention `@claw` in any channel to start a run
+3. The agent responds in a thread with progress updates
+4. Open Claw Desktop later to review and resume
+
+## Setting Up Slack
+
+### Create a Slack App
+
+1. Go to [api.slack.com](https://api.slack.com)
+2. Create a new app with Bot Token Scopes:
+   - `app_mentions:read`
+   - `chat:write`
+   - `channels:history`
+   - `groups:history`
+3. Install to your workspace
+4. Copy the Bot Token
+
+### Configure OpenClaw
+
+Add to your OpenClaw `.env`:
+```
+SLACK_BOT_TOKEN=xoxb-your-token
+SLACK_SIGNING_SECRET=your-signing-secret
+```
+
+## Using Slack
+
+```
+@claw refactor the auth module
+```
+
+The agent will:
+1. Acknowledge your request
+2. Start working in a thread
+3. Update you with progress
+4. Ask for approval if needed (you can approve in Slack or Desktop)
+
+## Claw Desktop Integration
+
+Runs started from Slack show a Slack icon in Claw Desktop. Your `run_id` is consistent across both interfaces.

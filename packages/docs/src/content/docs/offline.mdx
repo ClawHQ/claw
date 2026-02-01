@@ -1,0 +1,41 @@
+---
+title: Offline Mode
+description: Using Claw Desktop when disconnected.
+---
+
+Claw Desktop gracefully degrades when you lose connection to your OpenClaw instance.
+
+## Offline Detection
+
+The app detects offline state when:
+- WebSocket connection fails
+- Connection times out
+- Network becomes unavailable
+
+## Offline Behavior
+
+When offline:
+- **"Offline" banner** appears at the top of the app
+- **Cached runs** are displayed from local storage
+- **Timeline events** show previously synced data
+- **Approve/Reject buttons** are disabled
+
+## What Still Works
+
+Even offline, you can:
+- Browse run history from cache
+- Read message timelines
+- View artifacts stored locally
+- Review file diffs
+
+## What Doesn't Work
+
+When offline, you cannot:
+- Approve or reject blocked actions
+- Resume runs
+- See new events from the agent
+- Start new runs
+
+## Reconnection
+
+Claw Desktop automatically reconnects with exponential backoff (1s, 2s, 4s, up to 10s max). Once reconnected, sync resumes automatically.

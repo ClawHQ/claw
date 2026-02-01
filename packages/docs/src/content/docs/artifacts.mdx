@@ -1,0 +1,35 @@
+---
+title: Artifacts
+description: View and review agent-generated artifacts.
+---
+
+Claw Desktop provides a dedicated panel for reviewing artifacts your agent created during a run.
+
+## Artifact Panel
+
+The right panel in Run Detail view shows three tabs:
+
+### Plan
+The agent's plan for the task (PLAN.md). Shows what the agent intends to do before starting work.
+
+### Summary
+What the agent accomplished (SUMMARY.md). Updated as the agent completes steps.
+
+### Verify
+Verification checklist (VERIFICATION.md). A list of items to check to confirm the work is correct.
+
+## File Diffs
+
+In the timeline, file changes appear as diff cards with:
+- **File path** — Which file was modified
+- **Syntax highlighting** — Language-aware diff rendering
+- **Expand/Collapse** — Click to see full diff content
+
+## Local Storage
+
+All artifacts are saved to your local workspace at:
+```
+~/Documents/ClawWorkspace/RUNS/<run_id>/ARTIFACTS/
+```
+
+You can browse these files in Finder even when Claw Desktop isn't running.
