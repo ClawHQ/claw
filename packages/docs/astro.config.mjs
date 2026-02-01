@@ -23,9 +23,6 @@ export default defineConfig({
     imageService: true,
     webAnalytics: { enabled: true },
   }),
-  redirects: {
-    "/": "/docs/", // Redirect root to /docs/
-  },
   devToolbar: {
     enabled: false,
   },
