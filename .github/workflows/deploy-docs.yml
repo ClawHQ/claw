@@ -1,0 +1,17 @@
+name: Deploy Docs to Vercel
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/docs/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deploy
+        run: |
+          curl -X POST "https://api.vercel.com/v1/integrations/deploy/prj_H0lXWE65XTw2bVy41AaDjFSkbivX/4Ryh5q5XMH"
