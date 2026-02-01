@@ -16,7 +16,7 @@ const isVercelBuild = process.env.VERCEL === "1" || process.env.CI === "true"
 // https://astro.build/config
 export default defineConfig({
   site: config.url,
-  base: "/docs", // Assets served from /docs/_astro/ to work with claw.so/docs proxy
+  base: "/", // Keep at root for docs.claw.so
   trailingSlash: "always",
   output: "server", // Vercel SSR
   adapter: vercel({
