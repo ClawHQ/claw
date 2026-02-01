@@ -1,4 +1,6 @@
 ---
+title: "Soul"
+
 summary: "Workspace template for SOUL.md"
 read_when:
   - Bootstrapping a workspace manually
