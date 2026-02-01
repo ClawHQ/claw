@@ -16,18 +16,13 @@ const isVercelBuild = process.env.VERCEL === "1" || process.env.CI === "true"
 // https://astro.build/config
 export default defineConfig({
   site: config.url,
-  base: "/", // Must be root for Vercel SSR - assets served at /_astro/*
+  base: "/docs", // Assets served from /docs/_astro/ to work with claw.so/docs proxy
   trailingSlash: "always",
-  output: isDev && !isVercelBuild ? "static" : "server",
-  adapter:
-    isDev && !isVercelBuild
-      ? undefined
-      : vercel({
-        imageService: true,
-        webAnalytics: {
-          enabled: true,
-        },
-      }),
+  output: "server", // Vercel SSR
+  adapter: vercel({
+    imageService: true,
+    webAnalytics: { enabled: true },
+  }),
   devToolbar: {
     enabled: false,
   },
